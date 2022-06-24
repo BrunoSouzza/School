@@ -18,5 +18,13 @@ namespace School.API.Entities
         public bool Registered { get; private set; }
         public int CourseId { get; private set; }
         public Course Course { get; private set; }
+
+        public void Update(
+            string name,
+            bool registered)
+        {
+            Name = name;
+            Registered = registered;
+        }
     }
 }

@@ -21,6 +21,10 @@ namespace School.API.Controllers
         {
             try
             {
+                var course = _context.Courses.Find(studentAddModel.CourseId);
+                if (course is null)
+                    return NotFound(new { error = "Course not found" });
+
                 var newStudent = _context.Students.Add(studentAddModel);
                 await _context.SaveChangesAsync();
 
@@ -28,11 +32,11 @@ namespace School.API.Controllers
             }
             catch (DbUpdateException ex)
             {
-                return BadRequest(new { err = "Student already exists" });
+                return BadRequest(new { error = "Student already exists" });
             }
             catch (Exception)
             {
-                return BadRequest(new { err = "Could not save student" });
+                return BadRequest(new { error = "Could not save student" });
             }
 
         }
@@ -40,7 +44,9 @@ namespace School.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<StudentModel>> GetStudent(int id)
         {
-            var student = await _context.Students.FindAsync(id);
+            var student = await _context.Students
+                                        .Include(c => c.Course)
+                                        .FirstOrDefaultAsync(c => c.Id == id);
 
             if (student is null)
                 return NotFound();
@@ -48,33 +54,33 @@ namespace School.API.Controllers
             return Ok(student);
         }
 
-
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StudentModel>>> GetStudentModel()
+        public async Task<ActionResult<IEnumerable<StudentModel>>> GetStudents()
         {
             if (_context.Students == null)
                 return NotFound();
 
-            return Ok(await _context.Students.ToListAsync());
+            return Ok(await _context.Students.Include(c => c.Course).ToListAsync());
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStudentModel(int id, StudentModel studentModel)
+        public async Task<IActionResult> PutStudent(int id, StudentUpdateModel studentUpdateModel)
         {
-            if (id != studentModel.Id)
-            {
+            if (id != studentUpdateModel.Id)
                 return BadRequest();
-            }
-
-            _context.Entry(studentModel).State = EntityState.Modified;
-
+            
             try
             {
+                var student = await _context.Students.SingleOrDefaultAsync(c => c.Id == id);
+                if (student is null)
+                    return NotFound();
+
+                student.Update(studentUpdateModel.Name, studentUpdateModel.Registered);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StudentModelExists(id))
+                if (!StudentExists(id))
                 {
                     return NotFound();
                 }
@@ -92,18 +98,18 @@ namespace School.API.Controllers
         {
             if (_context.Students == null)
                 return NotFound();
-            
-            var studentModel = await _context.Students.FindAsync(id);
-            if (studentModel == null)
+
+            var student = await _context.Students.FindAsync(id);
+            if (student == null)
                 return NotFound();
 
-            _context.Students.Remove(studentModel);
+            _context.Students.Remove(student);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool StudentModelExists(int id)
+        private bool StudentExists(int id)
         {
             return (_context.Students?.Any(e => e.Id == id)).GetValueOrDefault();
         }

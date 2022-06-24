@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc; 
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using School.API.Context;
-using School.API.Entities;
 using School.API.Models;
 
 namespace School.API.Controllers
@@ -28,11 +27,11 @@ namespace School.API.Controllers
             }
             catch (DbUpdateException ex)
             {
-                return BadRequest( new { err = "Course already exists" });
+                return BadRequest( new { error = "Course already exists" });
             }
             catch (Exception)
             {
-                return BadRequest(new { err = "Could not save course" });
+                return BadRequest(new { error = "Could not save course" });
             }
         }
 
@@ -53,19 +52,22 @@ namespace School.API.Controllers
             if (_context.Courses == null)
                 return NotFound();
 
-            return Ok(await _context.Courses.ToListAsync());
+            return Ok(await _context.Courses.Include(c => c.Students).ToListAsync());
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(int id, Course course)
+        public async Task<IActionResult> PutCourse(int id, CourseUpdateModel courseUpdateModel)
         {
-            if (id != course.Id)
+            if (id != courseUpdateModel.Id)
                 return BadRequest();
-
-            _context.Entry(course).State = EntityState.Modified;
 
             try
             {
+                var course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == id);
+                if (course is null)
+                    return NotFound();
+
+                course.Update(courseUpdateModel.Name);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

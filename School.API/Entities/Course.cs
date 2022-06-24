@@ -12,5 +12,10 @@ namespace School.API.Entities
         }
         public string Name { get; private set; }
         public ICollection<Student> Students { get; private set; }
+
+        public void Update(string name)
+        {
+            Name = name;
+        }
     }
 }
