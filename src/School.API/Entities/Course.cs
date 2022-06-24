@@ -13,7 +13,7 @@ namespace School.API.Entities
         public string Name { get; private set; }
         public ICollection<Student> Students { get; private set; }
 
-        public void Update(string name)
+        public override void Update(string name, bool registered)
         {
             Name = name;
         }

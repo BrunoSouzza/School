@@ -8,5 +8,7 @@
         {
             Register = DateTime.UtcNow;
         }
+
+        public abstract void Update(string name, bool registered = false);
     }
 }
