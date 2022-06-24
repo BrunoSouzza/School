@@ -47,7 +47,7 @@ namespace School.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ICollection<CourseModel>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<CourseModel>>> GetCourses()
         {
             if (_context.Courses == null)
                 return NotFound();
