@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using School.API.Context;
@@ -13,8 +12,6 @@ namespace School.Tests
     {
         public StudentControllerTest()
         {
-
-            
         }
 
 
