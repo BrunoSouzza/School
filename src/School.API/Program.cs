@@ -1,4 +1,6 @@
 using School.API.Context;
+using School.API.Helper.Student.Strategy.Strategies;
+using School.API.Helper.Student.Strategy;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,10 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<SchoolContext>();
+builder.Services.AddScoped<IValidateStudentStrategy, MinNameLengthStrategy>();
+builder.Services.AddScoped<IValidateStudentStrategy, MaxNameLengthStrategy>();
+builder.Services.AddScoped<IValidateStudentStrategy, IsLegalAgeStrategy>();
+builder.Services.AddScoped<IValidateStudentFactoryStrategy, ValidateStudentFactoryStrategy>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
