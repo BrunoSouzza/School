@@ -20,7 +20,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<SchoolContext>();
 builder.Services.AddScoped<IValidateStudentStrategy, MinNameLengthStrategy>();
 builder.Services.AddScoped<IValidateStudentStrategy, MaxNameLengthStrategy>();
-builder.Services.AddScoped<IValidateStudentStrategy, IsLegalAgeStrategy>();
 builder.Services.AddScoped<IValidateStudentFactoryStrategy, ValidateStudentFactoryStrategy>();
 var app = builder.Build();
 

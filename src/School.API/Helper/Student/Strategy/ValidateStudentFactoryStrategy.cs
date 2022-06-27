@@ -18,7 +18,7 @@ namespace School.API.Helper.Student.Strategy
             foreach (var strategy in _strategies)
             {
                 var isMatch = await strategy.ConditionAsync(studentAddModel);
-                if (!isMatch)
+                if (isMatch)
                 {
                     resultMessage += $"{strategy.ExecuteStrategy()}\n";
                     resultMessage = resultMessage.Replace("\n", Environment.NewLine);

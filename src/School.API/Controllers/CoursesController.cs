@@ -14,7 +14,6 @@ namespace School.API.Controllers
         public CoursesController(SchoolContext context)
         {
             _context = context;
-            Console.WriteLine("TESTANDO");
         }
 
         [HttpPost]

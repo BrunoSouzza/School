@@ -6,7 +6,7 @@ namespace School.API.Helper.Student.Strategy.Strategies
     {
         public Task<bool> ConditionAsync(StudentAddModel studentAddModel)
         {
-            var hasNameMin = studentAddModel.Name.Length > 10;
+            var hasNameMin = studentAddModel.Name.Length < 10;
             return Task.FromResult(hasNameMin);
         }
 
