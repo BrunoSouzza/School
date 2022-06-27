@@ -5,7 +5,9 @@ namespace School.API.Models
     public class StudentAddModel
     {
         public StudentAddModel(
-            string name, int courseId)
+            string name,
+            int courseId
+            )
         {
             Name = name;
             Registered = true;

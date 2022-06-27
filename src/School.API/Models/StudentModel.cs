@@ -20,6 +20,7 @@ namespace School.API.Models
 
         public int Id { get; private set; }
         public string Name { get; private set; }
+        public int Age { get; private set; }
         public bool Registered { get; private set; }
         public DateTime Register { get; private set; }
         public CourseModel Course { get; private set; }
