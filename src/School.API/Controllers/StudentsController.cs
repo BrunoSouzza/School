@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using School.API.Context;
+using School.API.Helper.Student.Facade;
+using School.API.Helper.Student.Strategy;
 using School.API.Models;
 
 namespace School.API.Controllers
@@ -10,10 +12,14 @@ namespace School.API.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly SchoolContext _context;
+        private readonly IValidateStudentFactoryStrategy _validateStudentFactoryStrategy;
 
-        public StudentsController(SchoolContext context)
+        public StudentsController(
+            SchoolContext context, 
+            IValidateStudentFactoryStrategy validateStudentFactoryStrategy)
         {
             _context = context;
+            _validateStudentFactoryStrategy = validateStudentFactoryStrategy;
         }
 
         [HttpPost]
@@ -21,9 +27,20 @@ namespace School.API.Controllers
         {
             try
             {
+                var result = await _validateStudentFactoryStrategy.ValidateAsync(studentAddModel);
+                if (result.Length > 0)
+                    return BadRequest(new { error = result });
+
+                var createStudentFacade = new CreateStudentFacade();
+                var resultFacade = createStudentFacade.UnrestrictedStudent(studentAddModel);
+                if(!resultFacade)
+                    return NotFound(new { error = "Student with restriction" });
+
                 var course = _context.Courses.Find(studentAddModel.CourseId);
                 if (course is null)
                     return NotFound(new { error = "Course not found" });
+
+               
 
                 var newStudent = _context.Students.Add(studentAddModel);
                 await _context.SaveChangesAsync();
