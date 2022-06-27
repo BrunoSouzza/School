@@ -10,11 +10,6 @@ namespace School.Tests
 {
     public class StudentControllerTest
     {
-        public StudentControllerTest()
-        {
-        }
-
-
         [Fact]
         public async Task StudentController_ValidRequestNameMinLength_ShouldReturnError()
         {

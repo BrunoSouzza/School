@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using School.API.Context;
+using School.API.Helper.Logger;
 using School.API.Helper.Student.Facade;
 using School.API.Helper.Student.Strategy;
 using School.API.Models;
@@ -13,6 +14,7 @@ namespace School.API.Controllers
     {
         private readonly SchoolContext _context;
         private readonly IValidateStudentFactoryStrategy _validateStudentFactoryStrategy;
+        private readonly ILog _log = Log.GetInstance;
 
         public StudentsController(
             SchoolContext context, 
@@ -27,6 +29,8 @@ namespace School.API.Controllers
         {
             try
             {
+                _log.LogInfo("POST STUDENT - INIT");
+
                 var result = await _validateStudentFactoryStrategy.ValidateAsync(studentAddModel);
                 if (result.Length > 0)
                     return BadRequest(new { error = result });
@@ -40,10 +44,10 @@ namespace School.API.Controllers
                 if (course is null)
                     return NotFound(new { error = "Course not found" });
 
-               
-
                 var newStudent = _context.Students.Add(studentAddModel);
                 await _context.SaveChangesAsync();
+
+                _log.LogInfo("POST STUDENT - SUCCESS");
 
                 return CreatedAtAction("GetStudent", new { id = newStudent.Entity.Id }, newStudent.Entity);
             }
