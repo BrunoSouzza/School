@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using School.API.Context;
 using School.API.Controllers;
+using System.Diagnostics.CodeAnalysis;
 using School.API.Helper.Student.Strategy;
 using School.API.Helper.Student.Strategy.Strategies;
 using School.API.Models;
 
 namespace School.Tests
 {
+    [ExcludeFromCodeCoverage]
     public class StudentControllerTest
     {
         [Fact]

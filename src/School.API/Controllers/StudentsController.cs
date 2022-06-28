@@ -17,7 +17,7 @@ namespace School.API.Controllers
         private readonly ILog _log = Log.GetInstance;
 
         public StudentsController(
-            SchoolContext context, 
+            SchoolContext context,
             IValidateStudentFactoryStrategy validateStudentFactoryStrategy)
         {
             _context = context;
@@ -37,7 +37,7 @@ namespace School.API.Controllers
 
                 var createStudentFacade = new CreateStudentFacade();
                 var resultFacade = createStudentFacade.UnrestrictedStudent(studentAddModel);
-                if(!resultFacade)
+                if (!resultFacade)
                     return NotFound(new { error = "Student with restriction" });
 
                 var course = _context.Courses.Find(studentAddModel.CourseId);
@@ -89,7 +89,7 @@ namespace School.API.Controllers
         {
             if (id != studentUpdateModel.Id)
                 return BadRequest();
-            
+
             try
             {
                 var student = await _context.Students.SingleOrDefaultAsync(c => c.Id == id);
