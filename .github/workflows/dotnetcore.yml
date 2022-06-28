@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'internaltalent'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F921E48CDDE640F2BFC644060974E686 }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
