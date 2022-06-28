@@ -50,3 +50,25 @@ Na sequência, devemos efetivar as alterações
 dotnet ef migrations add alterStudent --project .\src\School.API\
 ```
 ---
+
+Nesse projetos utilizamos 3 Padrões de Projetos.
+
+* Facade
+* Strategy
+* Singleton
+
+---
+
+> Facade [Estrutural]
+
+Padrão de projeto que tem por objetivo centralizar e esconder subsistemas e suas implementações para o Cliente. Agindo com uma FACHADA (Facade).
+
+---
+> Strategy [Comportamento]
+
+Padrão de projeto que permite a execução de uma família de algoritmos, onde são executados de modo independente e seletivo.
+
+---
+> Singleton [Criação]
+
+Padrão de projeto que garante que uma classe específica só possua uma única instância. 
