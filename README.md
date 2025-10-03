@@ -1,35 +1,37 @@
-# 🚀 Projeto School - API Completa para Gestão Escolar
+# 🚀 School Project - Complete API for School Management
 
-Bem-vindo ao **School**! Este projeto foi desenvolvido como parte do desafio *Internal Talent* e tem o objetivo de apresentar uma API robusta, moderna e bem estruturada para CRUD de entidades escolares. Aqui você encontra exemplos reais de boas práticas em arquitetura de software, programação orientada a objetos, padrões de projeto, integração contínua e muito mais! 😎
-
----
-
-## ✨ Principais Funcionalidades
-
-- **API RESTful** completa para gerenciamento de entidades escolares (CRUD 📝).
-- Uso de **banco de dados SQL Server** via Docker para fácil setup e portabilidade.
-- **Documentação interativa** com Swagger.
-- **Testes unitários** para garantir qualidade e confiabilidade das funcionalidades.
-- **Integração contínua** com GitHub Actions para builds automáticos.
-- Código versionado e organizado segundo as melhores práticas do mercado.
-- Uso de **Conventional Commits** para padronização dos commits.
-- Implementação de **padrões de projeto** (Facade, Strategy, Singleton).
-- Exemplo dos quatro pilares da **Programação Orientada a Objetos** (OOP).
-- **Relacionamentos entre objetos** (1:1, 1:n, n:n) utilizando ORM.
+Welcome to **School**!  
+This project was developed as part of the *Internal Talent* challenge and aims to present a robust, modern, and well-structured API for CRUD operations of school entities.  
+Here you will find real examples of best practices in software architecture, object-oriented programming, design patterns, continuous integration, and much more! 😎
 
 ---
 
-## 🚦 Pré-requisitos
+## ✨ Main Features
+
+- Complete **RESTful API** for managing school entities (CRUD 📝).
+- Uses **SQL Server database** via Docker for easy setup and portability.
+- **Interactive documentation** with Swagger.
+- **Unit tests** to ensure quality and reliability of features.
+- **Continuous integration** with GitHub Actions for automated builds.
+- Versioned and organized code following industry best practices.
+- Use of **Conventional Commits** for commit standardization.
+- Implementation of **design patterns** (Facade, Strategy, Singleton).
+- Example of the four pillars of **Object-Oriented Programming** (OOP).
+- **Object relationships** (1:1, 1:n, n:n) using ORM.
+
+---
+
+## 🚦 Requirements
 
 - [.NET 6+](https://dotnet.microsoft.com/download)
 - [Docker](https://www.docker.com/)
-- Cliente SQL Server (Management Studio, Azure Data Studio, DBeaver, etc.)
+- SQL Server Client (Management Studio, Azure Data Studio, DBeaver, etc.)
 
 ---
 
-## 🐳 Subindo o Banco de Dados com Docker
+## 🐳 Starting the Database with Docker
 
-Execute o comando abaixo no PowerShell para criar um container SQL Server local:
+Run the command below in PowerShell to create a local SQL Server container:
 
 ```bash
 docker run `
@@ -40,8 +42,9 @@ docker run `
 -d mcr.microsoft.com/mssql/server:2022-latest
 ```
 
-Conexão sugerida:
-```
+Suggested connection:
+
+```bash
 Server Name: localhost,1433
 Authentication: SQL Server Authentication
 User Name: sa
@@ -50,9 +53,9 @@ Password: Bruno@123
 
 ---
 
-## ⚡ Migrations do Banco de Dados
+## ⚡ Database Migrations
 
-Após iniciar o banco, rode os migrations para criar/atualizar as tabelas:
+After starting the database, run the migrations to create/update the tables:
 
 ```bash
 dotnet ef migrations add alterStudent --project .\src\School.API\
@@ -67,75 +70,70 @@ dotnet ef database update --project .\src\School.API\
 - **Strategy** *(Comportamental)*: Permite selecionar dinamicamente algoritmos ou comportamentos em tempo de execução.
 - **Singleton** *(Criacional)*: Garante que uma classe tenha apenas uma instância, fornecendo um ponto global de acesso.
 
+## 🧑‍💻 Design Patterns Used
+- **Facade** *(Structural)*: Centralizes and hides subsystems from the client, simplifying the use of complex features.
+- **Strategy** *(Behavioral)*: Allows dynamic selection of algorithms or behaviors at runtime.
+- **Singleton** *(Creational)*: Ensures a class has only one instance, providing a global access point.
 ---
 
-## 🧩 Pilares de Programação Orientada a Objetos (OOP)
+## 🧩 Object-Oriented Programming (OOP) Pillars
 
-O projeto demonstra:
-- **Abstração**
-- **Encapsulamento**
-- **Herança**
-- **Polimorfismo**
-
+The project demonstrates:
+- **Abstraction**
+- **Encapsulation**
+- **Inheritance**
+- **Polymorphism**
 ---
 
 ## 🛠️ ORM
-
-Utilização de ORM para mapeamento objeto-relacional e gerenciamento dos relacionamentos entre entidades (1:1, 1:n, n:n), facilitando consultas e manutenção do código.
+Uses ORM for object-relational mapping and managing relationships between entities (1:1, 1:n, n:n), making queries and code maintenance easier.
 
 ---
 
-## 🧪 Testes Unitários
+## 🧪 Unit Tests
 
-> **Destaque!**  
-> O projeto contém testes unitários para garantir a qualidade e robustez das principais funcionalidades!  
-> Execute os testes com o comando:
+> **Highlight!**  
+> The project contains unit tests to ensure the quality and robustness of the main features!
+> Run the tests with the command:
 
 ```bash
 dotnet test
 ```
 
-Garanta que tudo está funcionando antes de subir suas alterações! ✅
+Make sure everything is working before pushing your changes! ✅
 
 ---
 
-## 📖 Documentação com Swagger
+## 📖 Swagger Documentation
 
-Acesse a documentação interativa em:  
-`http://localhost:<porta>/swagger`
+Access the interactive documentation at: `http://localhost:<porta>/swagger`
 
-Explore e teste os endpoints da API diretamente pelo navegador!
+Explore and test the API endpoints directly from your browser!
+---
+
+## 🔄 Continuous Integration
+
+This project uses **GitHub Actions** for automatic build and test execution on every commit, ensuring continuous quality!
+Check the build status directly in the repository
 
 ---
 
-## 🔄 Integração Contínua
-
-Este projeto utiliza **GitHub Actions** para build e testes automáticos a cada commit, garantindo qualidade contínua! Veja o status das builds diretamente no repositório.
-
----
-
-## 📋 Checklist de Requisitos Atendidos
-
-- [x] CRUD completo
-- [x] Uso de tipos primitivos (int, bool, datetime, string, array)
-- [x] 1 exemplo de cada pilar OOP
-- [x] 1 exemplo de Design Pattern (criação, comportamento, estrutura)
-- [x] Relacionamento entre objetos
+## 📋 Requirements Checklist
+- [x] Complete CRUD
+- [x] Use of primitive types (int, bool, datetime, string, array)
+- [x] 1 example of each OOP pillar
+- [x] 1 example of Design Pattern (creational, behavioral, structural)
+- [x] Object relationships
 - [x] ORM
-- [x] Testes unitários
+- [x] Unit tests
 - [x] Swagger
-- [x] README.md detalhado
-- [x] Código versionado no GitHub
-- [x] Build no GitHub Actions
+- [x] Detailed README.md
+- [x] Versioned code on GitHub
+- [x] Buil with GitHub Actions
 - [x] Conventional Commits
-
 ---
 
-## 💡 Como contribuir
+## 💡 How to Contribute
 
-Sinta-se à vontade para enviar PRs, abrir issues, sugerir melhorias ou relatar bugs.  
-Vamos construir juntos um projeto cada vez melhor! 🤝✨
-
----
-
-Feito com dedicação por [BrunoSouzza](https://github.com/BrunoSouzza) 🚀
+Feel free to submit PRs, open issues, suggest improvements, or report bugs.
+Let's build an even better project together! 🤝✨
