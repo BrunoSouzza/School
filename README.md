@@ -64,12 +64,6 @@ dotnet ef database update --project .\src\School.API\
 
 ---
 
-## 🧑‍💻 Padrões de Projeto Utilizados
-
-- **Facade** *(Estrutural)*: Centraliza e esconde subsistemas do cliente, simplificando o uso de funcionalidades complexas.
-- **Strategy** *(Comportamental)*: Permite selecionar dinamicamente algoritmos ou comportamentos em tempo de execução.
-- **Singleton** *(Criacional)*: Garante que uma classe tenha apenas uma instância, fornecendo um ponto global de acesso.
-
 ## 🧑‍💻 Design Patterns Used
 - **Facade** *(Structural)*: Centralizes and hides subsystems from the client, simplifying the use of complex features.
 - **Strategy** *(Behavioral)*: Allows dynamic selection of algorithms or behaviors at runtime.
